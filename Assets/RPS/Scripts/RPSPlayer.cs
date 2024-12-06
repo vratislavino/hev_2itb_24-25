@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,6 +8,7 @@ public class RPSPlayer : MonoBehaviour
     Camera cam;
     NavMeshAgent agent;
     RPSSymbol symbol;
+    Animator animator;
 
     [SerializeField]
     float symbolChangeTime = 5f;
@@ -16,6 +18,7 @@ public class RPSPlayer : MonoBehaviour
         cam = Camera.main;
         agent = GetComponent<NavMeshAgent>();
         symbol = GetComponent<RPSSymbol>();
+        animator = GetComponent<Animator>();
         StartCoroutine(ChangeSymbol());
     }
 
@@ -40,5 +43,12 @@ public class RPSPlayer : MonoBehaviour
                 agent.SetDestination(hit.point);
             }
         }
+
+        UpdateAnimation();
+    }
+
+    private void UpdateAnimation()
+    {
+        animator.SetFloat("Speed", agent.velocity.magnitude);
     }
 }
