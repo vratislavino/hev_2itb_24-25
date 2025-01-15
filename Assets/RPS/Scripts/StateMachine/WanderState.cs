@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
@@ -53,15 +55,29 @@ public class WanderState : State
             RANGE
             );
 
-        var symbol = clds.FirstOrDefault(
+        var symbolCol = clds.FirstOrDefault(
             cld => cld.GetComponentInParent<RPSSymbol>() 
             && cld.transform.parent != agent.transform
             );
-
-        if(symbol != null)
+        
+        if(symbolCol != null)
         {
-            Debug.Log(symbol.name, symbol.gameObject);
-            return new AggroState(agent);
+            var symbol = symbolCol.GetComponentInParent<RPSSymbol>();
+            var wouldWin = mySymbol.CurrentSymbol.WouldWin(symbol.CurrentSymbol);
+
+            if(!wouldWin.HasValue)
+            {
+                return this;
+            } else
+            {
+                if(wouldWin.Value)
+                {
+                    return new AggroState(agent);
+                } else
+                {
+                    return new FleeState(agent);
+                }
+            }
         }
 
         return this;

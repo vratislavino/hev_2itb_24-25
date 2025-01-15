@@ -2,20 +2,19 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AggroState : State
+public class FleeState : State
 {
-    public AggroState(NavMeshAgent agent) : base(agent)
+    public FleeState(NavMeshAgent agent) : base(agent)
     {
     }
 
     public override void UpdateState()
     {
-        Debug.Log("I am ready to attack your ass!");
+        Debug.Log("I am ready to leave your ass!");
     }
 
     public override State TryToChangeState()
     {
-
         // zmìna stavu na základì pozice hráèe
         var clds = Physics.OverlapSphere(
             agent.transform.position,
@@ -34,7 +33,7 @@ public class AggroState : State
 
             if (!wouldWin.HasValue)
             {
-                return this;
+                return new WanderState(agent);
             }
             else
             {
@@ -44,7 +43,7 @@ public class AggroState : State
                 }
                 else
                 {
-                    return new FleeState(agent);
+                    return this;
                 }
             }
         }
