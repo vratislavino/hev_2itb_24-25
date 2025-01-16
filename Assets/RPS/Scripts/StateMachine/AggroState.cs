@@ -4,12 +4,18 @@ using UnityEngine.AI;
 
 public class AggroState : State
 {
+    private Transform target;
+
     public AggroState(NavMeshAgent agent) : base(agent)
     {
     }
 
     public override void UpdateState()
     {
+        if(target == null)
+            return;
+
+        agent.SetDestination(target.position);
         Debug.Log("I am ready to attack your ass!");
     }
 
@@ -30,17 +36,19 @@ public class AggroState : State
         if (symbolCol != null)
         {
             var symbol = symbolCol.GetComponentInParent<RPSSymbol>();
+            target = symbol.transform;
+            
             var wouldWin = mySymbol.CurrentSymbol.WouldWin(symbol.CurrentSymbol);
 
             if (!wouldWin.HasValue)
             {
-                return this;
+                return new WanderState(agent);
             }
             else
             {
                 if (wouldWin.Value)
                 {
-                    return new AggroState(agent);
+                    return this;
                 }
                 else
                 {

@@ -4,12 +4,19 @@ using UnityEngine.AI;
 
 public class FleeState : State
 {
+    private Transform target = null;
+
     public FleeState(NavMeshAgent agent) : base(agent)
     {
     }
 
     public override void UpdateState()
     {
+        if(target == null)
+            return;
+
+        Vector3 goPoint = target.position - agent.transform.position;
+        agent.SetDestination(goPoint);
         Debug.Log("I am ready to leave your ass!");
     }
 
@@ -29,6 +36,8 @@ public class FleeState : State
         if (symbolCol != null)
         {
             var symbol = symbolCol.GetComponentInParent<RPSSymbol>();
+            target = symbol.transform;
+            
             var wouldWin = mySymbol.CurrentSymbol.WouldWin(symbol.CurrentSymbol);
 
             if (!wouldWin.HasValue)
