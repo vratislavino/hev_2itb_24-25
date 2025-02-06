@@ -47,11 +47,15 @@ public class RPSAttack : MonoBehaviour
 
         foreach(var symbol in symbols)
         {
+            if(symbol == null) continue;
+
+            //Debug.Log("Checking symbol enemy:" + symbol + ", my: " + mySymbol);
             var wouldWin = mySymbol.CurrentSymbol.WouldWin(symbol.CurrentSymbol);
             if(wouldWin.HasValue && wouldWin.Value)
             {
                 Debug.Log($"{symbol.name} died!");
-                Destroy(symbol.gameObject);
+                symbol.TakeDamage();
+                //Destroy(symbol.gameObject);
             }
         }
 
@@ -59,6 +63,6 @@ public class RPSAttack : MonoBehaviour
 
     private void DoAnimation()
     {
-        attackParticles.Emit(50);
+        attackParticles.Emit(100);
     }
 }

@@ -11,9 +11,21 @@ public class RPSSymbol : MonoBehaviour
     [SerializeField]
     private MeshRenderer symbolRenderer;
 
+    [SerializeField]
+    private int lives = 1;
+
     void Start()
     {
         ChangeSymbol(GetRandomSymbol(false));
+    }
+
+    public void TakeDamage()
+    {
+        lives--;
+        if(lives <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void ChangeSymbol(Symbol newSymbol)

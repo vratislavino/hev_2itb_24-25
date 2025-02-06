@@ -8,6 +8,7 @@ public class AggroState : State
 
     public AggroState(NavMeshAgent agent) : base(agent)
     {
+        Debug.Log("I am ready to attack your ass!");
     }
 
     public override void UpdateState()
@@ -16,7 +17,6 @@ public class AggroState : State
             return;
 
         agent.SetDestination(target.position);
-        Debug.Log("I am ready to attack your ass!");
     }
 
     public override State TryToChangeState()

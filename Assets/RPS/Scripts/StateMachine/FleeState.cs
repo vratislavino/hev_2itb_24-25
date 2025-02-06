@@ -8,6 +8,7 @@ public class FleeState : State
 
     public FleeState(NavMeshAgent agent) : base(agent)
     {
+        Debug.Log("I am ready to leave your ass!");
     }
 
     public override void UpdateState()
@@ -17,7 +18,6 @@ public class FleeState : State
 
         Vector3 goPoint = target.position - agent.transform.position;
         agent.SetDestination(goPoint);
-        Debug.Log("I am ready to leave your ass!");
     }
 
     public override State TryToChangeState()
