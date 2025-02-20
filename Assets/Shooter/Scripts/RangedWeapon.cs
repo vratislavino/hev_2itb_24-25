@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Video;
 
-public class RangedWeapon : Weapon
+public abstract class RangedWeapon : Weapon
 { // reloading
     [SerializeField]
     private float bulletSpeed;
@@ -16,8 +16,9 @@ public class RangedWeapon : Weapon
     [SerializeField]
     private Transform bulletSpawnPoint;
 
-    void Start()
+    protected virtual void Start()
     {
+        ShootInputMethod = Input.GetButtonDown;
         currentAmmo = maxAmmo;
     }
 
@@ -39,10 +40,7 @@ public class RangedWeapon : Weapon
             );
 
         bullet.AddForce(bulletSpawnPoint.forward * bulletSpeed, ForceMode.Impulse);
-    }
-
-    void Update()
-    {
         
+        Destroy(bullet.gameObject, 3);
     }
 }

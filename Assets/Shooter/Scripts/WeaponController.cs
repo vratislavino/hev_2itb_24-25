@@ -15,7 +15,7 @@ public class WeaponController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (currentWeapon.ShootInputMethod("Fire1"))
             currentWeapon.Attack();
     }
 }
