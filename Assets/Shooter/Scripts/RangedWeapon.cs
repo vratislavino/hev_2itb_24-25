@@ -4,17 +4,17 @@ using UnityEngine.Video;
 public abstract class RangedWeapon : Weapon
 { // reloading
     [SerializeField]
-    private float bulletSpeed;
+    protected float bulletSpeed;
 
     [SerializeField]
     private int maxAmmo;
     private int currentAmmo;
 
     [SerializeField]
-    private Rigidbody bulletPrefab;
+    protected Rigidbody bulletPrefab;
 
     [SerializeField]
-    private Transform bulletSpawnPoint;
+    protected Transform bulletSpawnPoint;
 
     protected virtual void Start()
     {
