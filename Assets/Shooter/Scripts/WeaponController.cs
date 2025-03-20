@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
+    public event Action<Weapon, Weapon> WeaponChanged;
+
     Weapon currentWeapon;
     List<Weapon> weapons = new List<Weapon>();
 
@@ -16,8 +19,12 @@ public class WeaponController : MonoBehaviour
 
     void ChangeWeapon(Weapon newW)
     {
+
+
         if(currentWeapon != null)
             currentWeapon.gameObject.SetActive(false);
+
+        WeaponChanged?.Invoke(currentWeapon, newW);
 
         currentWeapon = newW;
         Debug.Log($"Setting weapon {currentWeapon.name}");

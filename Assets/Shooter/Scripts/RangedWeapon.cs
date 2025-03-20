@@ -16,6 +16,9 @@ public abstract class RangedWeapon : Weapon
     [SerializeField]
     protected Transform bulletSpawnPoint;
 
+    public override int CurrentAmmo => currentAmmo;
+    public override int MaxAmmo => maxAmmo;
+
     protected virtual void Start()
     {
         ShootInputMethod = Input.GetButtonDown;
