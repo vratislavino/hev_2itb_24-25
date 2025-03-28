@@ -16,20 +16,52 @@ public abstract class RangedWeapon : Weapon
     [SerializeField]
     protected Transform bulletSpawnPoint;
 
+    [SerializeField]
+    protected float reloadTime;
+    private float remainingReloadTime;
+
     public override int CurrentAmmo => currentAmmo;
     public override int MaxAmmo => maxAmmo;
+    public override bool IsReloading => remainingReloadTime > 0;
 
     protected virtual void Start()
     {
         ShootInputMethod = Input.GetButtonDown;
-        currentAmmo = maxAmmo;
+        ChangeAmmo(maxAmmo);
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        if(remainingReloadTime > 0)
+        {
+            remainingReloadTime -= Time.deltaTime;
+            RaiseReloadProgressChanged(remainingReloadTime / reloadTime);
+            if (remainingReloadTime <= 0)
+            {
+                ChangeAmmo(maxAmmo);
+            }
+        }
+    }
+
+    private void ChangeAmmo(int ammo)
+    {
+        currentAmmo = ammo;
+        RaiseAmmoChanged();
+    }
+
+    public override void Reload()
+    {
+        remainingReloadTime = reloadTime;
+        RaiseReloadProgressChanged(1);
     }
 
     protected override void DoAttack()
     {
-        if (currentAmmo > 0)
+        if (currentAmmo > 0 && !IsReloading)
         {
-            currentAmmo--;
+            ChangeAmmo(currentAmmo - 1);
             Shoot();
         }
     }

@@ -1330,9 +1330,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRate: 0.5
   bulletSpeed: 2
-  maxAmmo: 1000
+  maxAmmo: 4
   bulletPrefab: {fileID: 6176656683099120860, guid: 6269d56794d6f4c47aa2dd04159535c5, type: 3}
   bulletSpawnPoint: {fileID: 1142713972}
+  reloadTime: 3.5
   pellets: 20
   spread: 0.5
 --- !u!1 &340959486
@@ -2473,9 +2474,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRate: 0.2
   bulletSpeed: 2
-  maxAmmo: 30000
+  maxAmmo: 30
   bulletPrefab: {fileID: 6176656683099120860, guid: 6269d56794d6f4c47aa2dd04159535c5, type: 3}
   bulletSpawnPoint: {fileID: 1489137530}
+  reloadTime: 1.8
 --- !u!1 &740121134
 GameObject:
   m_ObjectHideFlags: 0
@@ -3906,7 +3908,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 0f6643016728aa04394d86562c2ebe7a, type: 3}
   m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -4291,6 +4293,7 @@ MonoBehaviour:
   maxAmmo: 7
   bulletPrefab: {fileID: 6176656683099120860, guid: 6269d56794d6f4c47aa2dd04159535c5, type: 3}
   bulletSpawnPoint: {fileID: 1787087282}
+  reloadTime: 1.2
 --- !u!1 &1221155522
 GameObject:
   m_ObjectHideFlags: 0
@@ -6048,6 +6051,9 @@ MonoBehaviour:
   weaponName: {fileID: 1386773183}
   weaponAmmo: {fileID: 1037329827}
   weaponImage: {fileID: 1329646502}
+  normalCrosshair: {fileID: 556774783}
+  reloadCrosshair: {fileID: 1785658460}
+  reloadCrosshairFill: {fileID: 1055157709}
   weaponController: {fileID: 1283133106}
 --- !u!1 &1785658460
 GameObject:
